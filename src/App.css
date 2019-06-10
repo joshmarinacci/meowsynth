@@ -1,3 +1,9 @@
+.layout-canvas {
+    top: 100px;
+    position: absolute;
+    left:0;
+    width: 100%;
+}
 .sequence-view {
     border: 2px solid green;
 }
