@@ -186,15 +186,15 @@ export class App extends Component {
                     const val = seq.notes[index]
                     if (val) {
                         console.log("play", seq.title,pitch)
-                        this.synth.triggerAttackRelease(pitch, "16n");
+                        this.synth.triggerAttackRelease(pitch, "8n");
                     }
                 })
             })
 
-        }, beats, "4n")
+        }, beats, "8n")
             .start(0)
 
-        synth.triggerAttackRelease("C4", "4n");
+        synth.triggerAttackRelease("C4", "8n");
         Tone.Transport.on("stop", () => {
             this.setState({playing:false})
         })
