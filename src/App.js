@@ -12,6 +12,12 @@ class Sequence {
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
         this.instrument = opts.instrument
     }
+    clear() {
+        this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
+    }
+    fill() {
+        this.notes.fill(1)
+    }
 }
 const sequences = [
     new Sequence({
@@ -126,6 +132,14 @@ export class App extends Component {
     togglePlaying = () => {
         Tone.Transport.toggle()
     }
+    clearBoard = () => {
+        sequences.forEach(seq => seq.clear())
+        this.setState({column:0})
+    }
+    fillBoard = () => {
+        sequences.forEach(seq => seq.fill())
+        this.setState({column:0})
+    }
 
     constructor(props, context) {
         super(props, context)
@@ -181,9 +195,18 @@ export class App extends Component {
                 <button onClick={this.togglePlaying}>
                     {this.state.playing?"stop":"start"}
                 </button>
+                <button onClick={this.clearBoard}>
+                    clear
+                </button>
+                <button onClick={this.fillBoard}>
+                    BBEE AA SSAAVVAAGGEE!!!!!!
+                </button>
             <div className="layout-canvas">
                 {sequences.map((seq, i) => {
-                    return <SequenceView sequence={seq} key={i} instrument={this.synth} column={this.state.column}/>
+                    return <SequenceView sequence={seq}
+                                         key={i}
+                                         instrument={this.synth}
+                                         column={this.state.column}/>
                 })}
             </div>
 
