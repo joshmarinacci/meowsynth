@@ -60,7 +60,6 @@ class SequenceView extends Component {
         return this.state.seq.notes[index]
     }
     toggleNote = (col, pitch, row) => {
-        console.log("setting at",col,pitch,row)
         const index = row*SEQUENCE_LENGTH+col
         const old = this.isNoteSelected(row,col)
         const seq = this.state.seq
@@ -108,7 +107,6 @@ class SequenceRow extends Component {
         return <div className="sequence-row">{beats}</div>
     }
     clicked(col) {
-        console.log("playing",this.props.pitch)
         this.props.instrument.triggerAttackRelease([this.props.pitch],'4n')
         this.props.onToggleNote(col)
     }
@@ -120,7 +118,7 @@ class SequenceNote extends Component {
         const colors = ['#ccc','blue','#f0f0f0','aqua']
         const index = (this.props.selected?1:0) + (this.props.active?2:0)
         style.backgroundColor = colors[index]
-        return <button style={style}  className="note" onClick={this.props.onClick}>:)</button>
+        return <button style={style}  className="note" onClick={this.props.onClick}>♾️</button>
     }
     play = () => {
         this.props.row.play()
@@ -145,7 +143,14 @@ export class App extends Component {
         super(props, context)
         const synth = new Tone.PolySynth(8, Tone.Synth, {
             "oscillator": {
-                "partials": [0, 2, 3, 4]
+                type:'triangle',
+                "partials": [0, 2, 3, 4],
+                envelope: {
+                    attack:0.001,
+                    decay : 1.6 ,
+                    sustain : 0.0 ,
+                    release : 1.6,
+                }
             }
         }).toMaster()
         this.state = {
