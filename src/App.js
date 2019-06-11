@@ -2,31 +2,40 @@ import React, {Component} from 'react';
 import './App.css';
 import Tone from "tone"
 
+const SEQUENCE_LENGTH = 32
+
+class Sequence {
+    constructor(opts) {
+        this.title = opts.title
+        this.position = opts.position || { x: 0, y: 0}
+        this.pitches = opts.pitches
+        this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
+        this.instrument = opts.instrument
+    }
+}
 const sequences = [
-    {
+    new Sequence({
         title:'synth',
         position: {
             x:10,
             y:10,
         },
-        pitches:['A4','B4','C5','D5'],
-        notes:new Array(16),
+        pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
         instrument:{
             name:'synth1'
         },
-    },
-    {
+    }),
+    new Sequence({
         title:'drum',
         position:{
             x:20,
-            y:200,
+            y:350,
         },
-        pitches:['C3','D6'],
-        notes:[1,0],
+        pitches:['C3','F3'],
         instrument:{
             name:'drum'
         }
-    }
+    })
 ]
 
 class SequenceView extends Component {
@@ -38,7 +47,7 @@ class SequenceView extends Component {
     }
     isNoteSelected = (row,col) => {
         const seq = this.props.sequence
-        const index = row*16+col
+        const index = row*SEQUENCE_LENGTH+col
         if(index > this.state.seq.notes.length-1) {
             return false
         }
@@ -46,7 +55,7 @@ class SequenceView extends Component {
     }
     toggleNote = (col, pitch, row) => {
         console.log("setting at",col,pitch,row)
-        const index = row*16+col
+        const index = row*SEQUENCE_LENGTH+col
         const old = this.isNoteSelected(row,col)
         const seq = this.state.seq
         seq.notes[index] = !old
@@ -63,9 +72,12 @@ class SequenceView extends Component {
         }}>
             {
                 this.props.sequence.pitches.map((pitch,i)=>{
-                    return <SequenceRow key={i} pitch={pitch} instrument={this.props.instrument}
+                    return <SequenceRow key={i}
+                                        pitch={pitch}
+                                        instrument={this.props.instrument}
                                         isNoteSelected={(col)=>this.isNoteSelected(i,col)}
                                         onToggleNote={(col)=>this.toggleNote(col,pitch,i)}
+                                        column={this.props.column}
                     />
                 })
             }
@@ -76,9 +88,12 @@ class SequenceView extends Component {
 class SequenceRow extends Component {
     render() {
         const beats = []
-        for(let i=0; i<16; i++) {
+        for(let i=0; i<SEQUENCE_LENGTH; i++) {
             const selected = this.props.isNoteSelected(i)
-            beats.push(<SequenceNote key={i} beat={i} row={this} selected={selected}
+            const active = this.props.column === i
+            beats.push(<SequenceNote key={i} beat={i} row={this}
+                                     selected={selected}
+                                     active={active}
                                      onClick={()=>{
                                          this.clicked(i)
                                      }}
@@ -95,11 +110,11 @@ class SequenceRow extends Component {
 
 class SequenceNote extends Component {
     render() {
-        return <button
-        style={{
-            backgroundColor:this.props.selected?'magenta':'white'
-        }}
-            className="note" onClick={this.props.onClick}></button>
+        const style = {}
+        const colors = ['#ccc','blue','#f0f0f0','aqua']
+        const index = (this.props.selected?1:0) + (this.props.active?2:0)
+        style.backgroundColor = colors[index]
+        return <button style={style}  className="note" onClick={this.props.onClick}>:)</button>
     }
     play = () => {
         this.props.row.play()
@@ -119,14 +134,18 @@ export class App extends Component {
                 "partials": [0, 2, 3, 4]
             }
         }).toMaster()
+        this.state = {
+            column:0,
+            playing:false,
+        }
         this.synth = synth
+        const beats = []
+        for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
         const loop = new Tone.Sequence((time, col) => {
-            const index =
-            console.log("tick")
-
+            this.setState({column:col})
             sequences.forEach((seq)=>{
                 seq.pitches.forEach((pitch,row) => {
-                    const index = row * 16 + col
+                    const index = row * SEQUENCE_LENGTH + col
                     if (index > seq.notes.length - 1) {
                         return false
                     }
@@ -138,12 +157,17 @@ export class App extends Component {
                 })
             })
 
-        }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "4n")
+        }, beats, "4n")
             .start(0)
 
         synth.triggerAttackRelease(["C4", "E4", "A4"], "4n");
         Tone.Transport.on("stop", () => {
             console.log("tone trnasport stopped")
+            this.setState({playing:false})
+        })
+        Tone.Transport.on("start", () => {
+            console.log("tone transport started")
+            this.setState({playing:true})
         })
         // Tone.Transport.start()
     }
@@ -154,10 +178,12 @@ export class App extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.togglePlaying}>play</button>
+                <button onClick={this.togglePlaying}>
+                    {this.state.playing?"stop":"start"}
+                </button>
             <div className="layout-canvas">
                 {sequences.map((seq, i) => {
-                    return <SequenceView sequence={seq} key={i} instrument={this.synth}/>
+                    return <SequenceView sequence={seq} key={i} instrument={this.synth} column={this.state.column}/>
                 })}
             </div>
 
