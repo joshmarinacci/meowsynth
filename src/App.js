@@ -34,8 +34,8 @@ const sequences = [
     new Sequence({
         title:'drum',
         position:{
-            x:20,
-            y:350,
+            x:10,
+            y:260,
         },
         pitches:['C3','F3'],
         instrument:{
@@ -107,7 +107,7 @@ class SequenceRow extends Component {
         return <div className="sequence-row">{beats}</div>
     }
     clicked(col) {
-        this.props.instrument.triggerAttackRelease([this.props.pitch],'4n')
+        this.props.instrument.triggerAttackRelease(this.props.pitch,'4n')
         this.props.onToggleNote(col)
     }
 }
@@ -141,18 +141,33 @@ export class App extends Component {
 
     constructor(props, context) {
         super(props, context)
-        const synth = new Tone.PolySynth(8, Tone.Synth, {
-            "oscillator": {
-                type:'triangle',
-                "partials": [0, 2, 3, 4],
-                envelope: {
-                    attack:0.001,
-                    decay : 1.6 ,
-                    sustain : 0.0 ,
-                    release : 1.6,
+        const synth = new Tone.MonoSynth(
+            {
+                oscillator : {
+                    type : 'fatsawtooth',
                 }
+                ,
+                envelope : {
+                    attack : 0.05 ,
+                    decay : 0.3 ,
+                    sustain : 0.4 ,
+                    release : 0.8
+                }
+                ,
+                /*
+                filterEnvelope : {
+                    attack : 0.06 ,
+                    decay : 0.2 ,
+                    sustain : 0.5 ,
+                    release : 2 ,
+                    baseFrequency : 200 ,
+                    octaves : 7 ,
+                    exponent : 2
+                }
+                 */
             }
-        }).toMaster()
+        ).toMaster()
+        // var synth = new Tone.FatOscillator("Ab3", "sine", "square").toMaster().start();
         this.state = {
             column:0,
             playing:false,
@@ -171,7 +186,7 @@ export class App extends Component {
                     const val = seq.notes[index]
                     if (val) {
                         console.log("play", seq.title,pitch)
-                        this.synth.triggerAttackRelease([pitch], "16n");
+                        this.synth.triggerAttackRelease(pitch, "16n");
                     }
                 })
             })
@@ -179,13 +194,11 @@ export class App extends Component {
         }, beats, "4n")
             .start(0)
 
-        synth.triggerAttackRelease(["C4", "E4", "A4"], "4n");
+        synth.triggerAttackRelease("C4", "4n");
         Tone.Transport.on("stop", () => {
-            console.log("tone trnasport stopped")
             this.setState({playing:false})
         })
         Tone.Transport.on("start", () => {
-            console.log("tone transport started")
             this.setState({playing:true})
         })
         // Tone.Transport.start()
