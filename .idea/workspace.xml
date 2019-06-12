@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,18 +20,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="279">
+              <caret line="21" column="16" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="16" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <element signature="n#Sequence#0" />
-                <element signature="n#!!block;n#constructor#0;n#Sequence#0" />
-                <element signature="e#413#844#0" />
+                <element signature="e#521#557#0" />
+                <element signature="n#!!block;n#clear#0;n#Sequence#0" />
+                <element signature="n#!!block;n#fill#0;n#Sequence#0" />
+                <element signature="e#547#983#0" />
+                <element signature="e#566#780#0" />
+                <element signature="e#609#656#0" />
+                <element signature="n#SequenceView#0" />
                 <element signature="n#!!block;n#constructor#0;n#SequenceView#0" />
-                <element signature="e#591#633#0" />
-                <element signature="e#551#567#0" />
-                <element signature="e#785#797#0" />
-                <element signature="n#!!block;n#render#0;n#SequenceView#0" />
+                <element signature="e#1441#1643#0" />
+                <element signature="n#SequenceRow#0" />
+                <element signature="n#SequenceNote#0" />
               </folding>
             </state>
           </provider>
@@ -41,17 +45,26 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>sequences</find>
-      <find>sequencerow</find>
       <find>note</find>
       <find>156</find>
       <find>16</find>
       <find>:)</find>
       <find>synth</find>
       <find>triggerattackrelease</find>
+      <find>n&quot;</find>
+      <find>isnoteselect</find>
+      <find>sequencerow</find>
+      <find>togle</find>
+      <find>togglenote</find>
+      <find>isnoteselected</find>
+      <find>togglenoteat</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/App.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -116,7 +129,8 @@
       <option name="presentableId" value="Default" />
       <updated>1560054757750</updated>
       <workItem from="1560054759221" duration="6487000" />
-      <workItem from="1560193170491" duration="11176000" />
+      <workItem from="1560193170491" duration="11907000" />
+      <workItem from="1560298939593" duration="1705000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -153,11 +167,25 @@
       <option name="project" value="LOCAL" />
       <updated>1560220464393</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="improve instrument">
+      <created>1560221316214</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560221316214</updated>
+    </task>
+    <task id="LOCAL-00007" summary="change beats">
+      <created>1560271806515</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1560271806515</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17663000" />
+    <option name="totallyTimeSpent" value="20099000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -189,7 +217,9 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="more work on synth" />
     <MESSAGE value="swap button text" />
-    <option name="LAST_COMMIT_MESSAGE" value="swap button text" />
+    <MESSAGE value="improve instrument" />
+    <MESSAGE value="change beats" />
+    <option name="LAST_COMMIT_MESSAGE" value="change beats" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/index.js">
@@ -204,25 +234,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        <state relative-caret-position="240">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+        <state relative-caret-position="279">
+          <caret line="21" column="16" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="16" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-            <element signature="n#Sequence#0" />
-            <element signature="n#!!block;n#constructor#0;n#Sequence#0" />
-            <element signature="e#413#844#0" />
+            <element signature="e#521#557#0" />
+            <element signature="n#!!block;n#clear#0;n#Sequence#0" />
+            <element signature="n#!!block;n#fill#0;n#Sequence#0" />
+            <element signature="e#547#983#0" />
+            <element signature="e#566#780#0" />
+            <element signature="e#609#656#0" />
+            <element signature="n#SequenceView#0" />
             <element signature="n#!!block;n#constructor#0;n#SequenceView#0" />
-            <element signature="e#591#633#0" />
-            <element signature="e#551#567#0" />
-            <element signature="e#785#797#0" />
-            <element signature="n#!!block;n#render#0;n#SequenceView#0" />
+            <element signature="e#1441#1643#0" />
+            <element signature="n#SequenceRow#0" />
+            <element signature="n#SequenceNote#0" />
           </folding>
         </state>
       </provider>

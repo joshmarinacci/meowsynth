@@ -7,6 +7,11 @@
 .sequence-view {
     border: 2px solid green;
 }
+.sequence-view .pitch {
+    display: inline-block;
+    width: 30px;
+    text-align: right;
+}
 
 .sequence-row {
     border: 0px solid red;

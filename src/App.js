@@ -12,6 +12,19 @@ class Sequence {
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
         this.instrument = opts.instrument
     }
+    isNoteAt(pitch, col) {
+        const index = pitch*SEQUENCE_LENGTH+col
+        if(index > this.notes.length-1) {
+            return false
+        }
+        return this.notes[index]
+    }
+    toggleNoteAt(row,col) {
+        const index = row*SEQUENCE_LENGTH+col
+        const old = this.isNoteAt(row,col)
+        this.notes[index] = !old
+        console.log(this.notes)
+    }
     clear() {
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
     }
@@ -51,20 +64,11 @@ class SequenceView extends Component {
             seq:this.props.sequence
         }
     }
-    isNoteSelected = (row,col) => {
-        const seq = this.props.sequence
-        const index = row*SEQUENCE_LENGTH+col
-        if(index > this.state.seq.notes.length-1) {
-            return false
-        }
-        return this.state.seq.notes[index]
-    }
     toggleNote = (col, pitch, row) => {
-        const index = row*SEQUENCE_LENGTH+col
-        const old = this.isNoteSelected(row,col)
+        this.props.instrument.triggerAttackRelease(pitch,'4n')
+        this.state.seq.toggleNoteAt(row,col)
         const seq = this.state.seq
-        seq.notes[index] = !old
-        this.setState({seq:seq})
+        this.setState({seq:this.state.seq})
     }
 
     render() {
@@ -79,8 +83,8 @@ class SequenceView extends Component {
                 this.props.sequence.pitches.map((pitch,i)=>{
                     return <SequenceRow key={i}
                                         pitch={pitch}
-                                        instrument={this.props.instrument}
-                                        isNoteSelected={(col)=>this.isNoteSelected(i,col)}
+                                        row={i}
+                                        sequence={this.props.sequence}
                                         onToggleNote={(col)=>this.toggleNote(col,pitch,i)}
                                         column={this.props.column}
                     />
@@ -94,21 +98,17 @@ class SequenceRow extends Component {
     render() {
         const beats = []
         for(let i=0; i<SEQUENCE_LENGTH; i++) {
-            const selected = this.props.isNoteSelected(i)
+            const selected = this.props.sequence.isNoteAt(this.props.row,i)
             const active = this.props.column === i
             beats.push(<SequenceNote key={i} beat={i} row={this}
                                      selected={selected}
                                      active={active}
                                      onClick={()=>{
-                                         this.clicked(i)
+                                         this.props.onToggleNote(i)
                                      }}
             />)
         }
-        return <div className="sequence-row">{beats}</div>
-    }
-    clicked(col) {
-        this.props.instrument.triggerAttackRelease(this.props.pitch,'4n')
-        this.props.onToggleNote(col)
+        return <div className="sequence-row"><div className={"pitch"}>{this.props.pitch}</div>{beats}</div>
     }
 }
 
@@ -119,10 +119,6 @@ class SequenceNote extends Component {
         const index = (this.props.selected?1:0) + (this.props.active?2:0)
         style.backgroundColor = colors[index]
         return <button style={style}  className="note" onClick={this.props.onClick}>♾️</button>
-    }
-    play = () => {
-        this.props.row.play()
-        this.props.row.setNote()
     }
 }
 
