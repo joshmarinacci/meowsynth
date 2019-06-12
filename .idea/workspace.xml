@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="">
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="make windows draggable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
@@ -17,25 +17,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="542">
+              <caret line="236" selection-start-line="236" selection-end-line="236" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+                <element signature="n#!!block;n#isNoteSelected#0;n#Sequence#0" />
                 <element signature="e#521#557#0" />
                 <element signature="n#!!block;n#clear#0;n#Sequence#0" />
                 <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-                <element signature="e#547#983#0" />
-                <element signature="e#566#780#0" />
-                <element signature="e#609#656#0" />
-                <element signature="n#SequenceView#0" />
-                <element signature="n#!!block;n#constructor#0;n#SequenceView#0" />
-                <element signature="e#1441#1643#0" />
                 <element signature="n#SequenceRow#0" />
                 <element signature="n#SequenceNote#0" />
+                <element signature="e#3808#3847#0" />
+                <element signature="e#3871#3958#0" />
+                <element signature="e#3981#4067#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/App.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -49,7 +56,6 @@
       <find>156</find>
       <find>16</find>
       <find>:)</find>
-      <find>synth</find>
       <find>triggerattackrelease</find>
       <find>n&quot;</find>
       <find>isnoteselect</find>
@@ -58,6 +64,11 @@
       <find>togglenote</find>
       <find>isnoteselected</find>
       <find>togglenoteat</find>
+      <find>title</find>
+      <find>console.log</find>
+      <find>synth</find>
+      <find>instrument.</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -69,8 +80,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/App.css" />
       </list>
     </option>
   </component>
@@ -130,7 +141,7 @@
       <updated>1560054757750</updated>
       <workItem from="1560054759221" duration="6487000" />
       <workItem from="1560193170491" duration="11907000" />
-      <workItem from="1560298939593" duration="1705000" />
+      <workItem from="1560298939593" duration="3557000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -181,11 +192,25 @@
       <option name="project" value="LOCAL" />
       <updated>1560271806515</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="move more work into the sequence view">
+      <created>1560300921615</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1560300921615</updated>
+    </task>
+    <task id="LOCAL-00009" summary="make windows draggable">
+      <created>1560304423799</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1560304423799</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20099000" />
+    <option name="totallyTimeSpent" value="21951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -219,7 +244,9 @@
     <MESSAGE value="swap button text" />
     <MESSAGE value="improve instrument" />
     <MESSAGE value="change beats" />
-    <option name="LAST_COMMIT_MESSAGE" value="change beats" />
+    <MESSAGE value="move more work into the sequence view" />
+    <MESSAGE value="make windows draggable" />
+    <option name="LAST_COMMIT_MESSAGE" value="make windows draggable" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/index.js">
@@ -232,31 +259,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="16" />
+        <state relative-caret-position="542">
+          <caret line="236" selection-start-line="236" selection-end-line="236" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <element signature="n#!!block;n#isNoteSelected#0;n#Sequence#0" />
             <element signature="e#521#557#0" />
             <element signature="n#!!block;n#clear#0;n#Sequence#0" />
             <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-            <element signature="e#547#983#0" />
-            <element signature="e#566#780#0" />
-            <element signature="e#609#656#0" />
-            <element signature="n#SequenceView#0" />
-            <element signature="n#!!block;n#constructor#0;n#SequenceView#0" />
-            <element signature="e#1441#1643#0" />
             <element signature="n#SequenceRow#0" />
             <element signature="n#SequenceNote#0" />
+            <element signature="e#3808#3847#0" />
+            <element signature="e#3871#3958#0" />
+            <element signature="e#3981#4067#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
         </state>
       </provider>
     </entry>

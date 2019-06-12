@@ -36,22 +36,52 @@ const sequences = [
         title:'synth',
         position: {
             x:10,
-            y:0,
+            y:30,
         },
         pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
         instrument:{
-            name:'synth1'
+            name:'synth1',
+            synth: new Tone.MonoSynth(
+                {
+                    oscillator : {
+                        type : 'fatsawtooth',
+                    }
+                    ,
+                    envelope : {
+                        attack : 0.05 ,
+                        decay : 0.3 ,
+                        sustain : 0.4 ,
+                        release : 0.8
+                    }
+                    ,
+                }
+            ).toMaster()
         },
     }),
     new Sequence({
         title:'drum',
         position:{
             x:10,
-            y:260,
+            y:300,
         },
         pitches:['C3','F3'],
         instrument:{
-            name:'drum'
+            name:'drum',
+            synth: new Tone.MonoSynth(
+                {
+                    oscillator : {
+                        type : 'fatsawtooth',
+                    }
+                    ,
+                    envelope : {
+                        attack : 0.05 ,
+                        decay : 0.3 ,
+                        sustain : 0.4 ,
+                        release : 0.8
+                    }
+                    ,
+                }
+            ).toMaster()
         }
     })
 ]
@@ -64,14 +94,14 @@ class SequenceView extends Component {
         }
     }
     toggleNote = (col, pitch, row) => {
-        this.props.instrument.triggerAttackRelease(pitch,'4n')
+        this.state.seq.instrument.synth.triggerAttackRelease(pitch,'4n')
         this.state.seq.toggleNoteAt(row,col)
         const seq = this.state.seq
         this.setState({seq:this.state.seq})
     }
     mousePressed = (e) => {
-        this.offsetX = e.clientX - e.target.getBoundingClientRect().x
-        this.offsetY = e.clientY - e.target.getBoundingClientRect().y
+        this.offsetX = e.clientX - this.div.getBoundingClientRect().x
+        this.offsetY = e.clientY - this.div.getBoundingClientRect().y
         window.addEventListener('mousemove',this.mouseMoved)
         window.addEventListener('mouseup',this.mouseReleased)
     }
@@ -93,7 +123,9 @@ class SequenceView extends Component {
             flexDirection:'column-reverse',
         }}
                     onMouseDown={this.mousePressed}
+                    ref={(div)=>this.div = div}
         >
+            <div><button>up</button><button>down</button></div>
             {
                 this.props.sequence.pitches.map((pitch,i)=>{
                     return <SequenceRow key={i}
@@ -153,38 +185,10 @@ export class App extends Component {
 
     constructor(props, context) {
         super(props, context)
-        const synth = new Tone.MonoSynth(
-            {
-                oscillator : {
-                    type : 'fatsawtooth',
-                }
-                ,
-                envelope : {
-                    attack : 0.05 ,
-                    decay : 0.3 ,
-                    sustain : 0.4 ,
-                    release : 0.8
-                }
-                ,
-                /*
-                filterEnvelope : {
-                    attack : 0.06 ,
-                    decay : 0.2 ,
-                    sustain : 0.5 ,
-                    release : 2 ,
-                    baseFrequency : 200 ,
-                    octaves : 7 ,
-                    exponent : 2
-                }
-                 */
-            }
-        ).toMaster()
-        // var synth = new Tone.FatOscillator("Ab3", "sine", "square").toMaster().start();
         this.state = {
             column:0,
             playing:false,
         }
-        this.synth = synth
         const beats = []
         for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
         const loop = new Tone.Sequence((time, col) => {
@@ -198,7 +202,7 @@ export class App extends Component {
                     const val = seq.notes[index]
                     if (val) {
                         // console.log("play", seq.title,pitch)
-                        this.synth.triggerAttackRelease(pitch, "8n");
+                        seq.instrument.synth.triggerAttackRelease(pitch, "8n");
                     }
                 })
             })
@@ -206,7 +210,7 @@ export class App extends Component {
         }, beats, "8n")
             .start(0)
 
-        synth.triggerAttackRelease("C4", "8n");
+        // synth.triggerAttackRelease("C4", "8n");
         Tone.Transport.on("stop", () => {
             this.setState({playing:false})
         })
@@ -222,23 +226,25 @@ export class App extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.togglePlaying}>
-                    {this.state.playing?"stop":"start"}
-                </button>
-                <button onClick={this.clearBoard}>
-                    clear
-                </button>
-                <button onClick={this.fillBoard}>
-                    BBEE AA SSAAVVAAGGEE!!!!!!
-                </button>
-            <div className="layout-canvas">
-                {sequences.map((seq, i) => {
-                    return <SequenceView sequence={seq}
-                                         key={i}
-                                         instrument={this.synth}
-                                         column={this.state.column}/>
-                })}
-            </div>
+                <div className="layout-canvas">
+                    {sequences.map((seq, i) => {
+                        return <SequenceView sequence={seq}
+                                             key={i}
+                                             instrument={this.synth}
+                                             column={this.state.column}/>
+                    })}
+                </div>
+                <div className={"toolbar"}>
+                    <button onClick={this.togglePlaying}>
+                        {this.state.playing?"stop":"start"}
+                    </button>
+                    <button onClick={this.clearBoard}>
+                        clear
+                    </button>
+                    <button onClick={this.fillBoard}>
+                        BBEE AA SSAAVVAAGGEE!!!!!!
+                    </button>
+                </div>
 
             </div>
         );
