@@ -1,11 +1,19 @@
 .layout-canvas {
-    top: 100px;
+    top: 30px;
     position: absolute;
     left:0;
     width: 100%;
+    height: 80%;
+    overflow: scroll;
 }
 .sequence-view {
     border: 2px solid green;
+    background-color: #f0f0f0;
+    position: absolute;
+}
+.sequence-view .title {
+    padding: 0.25em 0 0.25em 30px;
+    user-select: none;
 }
 .sequence-view .pitch {
     display: inline-block;
@@ -15,6 +23,8 @@
 
 .sequence-row {
     border: 0px solid red;
+    display: flex;
+    flex-direction: row;
 }
 
 .note {

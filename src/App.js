@@ -23,7 +23,6 @@ class Sequence {
         const index = row*SEQUENCE_LENGTH+col
         const old = this.isNoteAt(row,col)
         this.notes[index] = !old
-        console.log(this.notes)
     }
     clear() {
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
@@ -37,7 +36,7 @@ const sequences = [
         title:'synth',
         position: {
             x:10,
-            y:10,
+            y:0,
         },
         pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
         instrument:{
@@ -70,15 +69,31 @@ class SequenceView extends Component {
         const seq = this.state.seq
         this.setState({seq:this.state.seq})
     }
-
+    mousePressed = (e) => {
+        this.offsetX = e.clientX - e.target.getBoundingClientRect().x
+        this.offsetY = e.clientY - e.target.getBoundingClientRect().y
+        window.addEventListener('mousemove',this.mouseMoved)
+        window.addEventListener('mouseup',this.mouseReleased)
+    }
+    mouseMoved = (e) => {
+        this.props.sequence.position.x = e.clientX - this.offsetX
+        this.props.sequence.position.y = e.clientY - this.offsetY
+        this.setState({seq:this.props.sequence})
+    }
+    mouseReleased = (e) => {
+        window.removeEventListener('mousemove',this.mouseMoved)
+        window.removeEventListener('mouseup',this.mouseReleased)
+    }
     render() {
         return <div className="sequence-view" style={{
             position:'absolute',
             left:this.props.sequence.position.x,
             top:this.props.sequence.position.y,
             display:'flex',
-            flexDirection:'column-reverse'
-        }}>
+            flexDirection:'column-reverse',
+        }}
+                    onMouseDown={this.mousePressed}
+        >
             {
                 this.props.sequence.pitches.map((pitch,i)=>{
                     return <SequenceRow key={i}
@@ -90,6 +105,7 @@ class SequenceView extends Component {
                     />
                 })
             }
+            <div className={"title"}>{this.props.sequence.title}</div>
         </div>
     }
 }
@@ -181,7 +197,7 @@ export class App extends Component {
                     }
                     const val = seq.notes[index]
                     if (val) {
-                        console.log("play", seq.title,pitch)
+                        // console.log("play", seq.title,pitch)
                         this.synth.triggerAttackRelease(pitch, "8n");
                     }
                 })
