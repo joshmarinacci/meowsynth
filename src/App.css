@@ -43,3 +43,14 @@
     z-index: 1;
     position: relative;
 }
+
+
+
+.hbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.spacer {
+    flex:1.0;
+}

@@ -8,6 +8,7 @@ class Sequence {
     constructor(opts) {
         this.title = opts.title
         this.position = opts.position || { x: 0, y: 0}
+        this.dimension = { w: 100, h: 100 }
         this.pitches = opts.pitches
         this.startPitch = opts.startPitch
         this.pitchCount = opts.pitchCount
@@ -92,6 +93,54 @@ const sequences = [
     })
 ]
 
+class ResizeHandler {
+    constructor(e, sequence, div, callback) {
+        this.callback = callback
+        this.seq = sequence
+        this.resizeX = e.clientX - div.getBoundingClientRect().x
+        this.resizeY = e.clientY - div.getBoundingClientRect().y
+        this.resizeW = div.getBoundingClientRect().width
+        this.resizeH = div.getBoundingClientRect().height
+        window.addEventListener('mousemove',this.resizeMoved)
+        window.addEventListener('mouseup',this.resizeReleased)
+    }
+
+    resizeMoved = (e) => {
+        const width = e.clientX - this.resizeX + this.resizeW
+        const height = e.clientY - this.resizeY + this.resizeH
+        this.seq.dimension.w = width
+        this.seq.dimension.h = height
+        this.callback()
+    }
+
+    resizeReleased = (e) => {
+        window.removeEventListener('mousemove',this.resizeMoved)
+        window.removeEventListener('mouseup',this.resizeReleased)
+    }
+
+}
+
+class MoveHandler {
+    constructor(e, sequence, div, callback) {
+        this.sequence = sequence
+        this.callback = callback
+        this.offsetX = e.clientX - div.getBoundingClientRect().x
+        this.offsetY = e.clientY - div.getBoundingClientRect().y
+        window.addEventListener('mousemove',this.mouseMoved)
+        window.addEventListener('mouseup',this.mouseReleased)
+    }
+
+    mouseMoved = (e) => {
+        this.sequence.position.x = e.clientX - this.offsetX
+        this.sequence.position.y = e.clientY - this.offsetY
+        this.callback()
+    }
+    mouseReleased = (e) => {
+        window.removeEventListener('mousemove',this.mouseMoved)
+        window.removeEventListener('mouseup',this.mouseReleased)
+    }
+}
+
 class SequenceView extends Component {
     movePitchUp = () => {
         const seq = this.props.sequence
@@ -121,35 +170,41 @@ class SequenceView extends Component {
         const seq = this.state.seq
         this.setState({seq:this.state.seq})
     }
+
     mousePressed = (e) => {
-        this.offsetX = e.clientX - this.div.getBoundingClientRect().x
-        this.offsetY = e.clientY - this.div.getBoundingClientRect().y
-        window.addEventListener('mousemove',this.mouseMoved)
-        window.addEventListener('mouseup',this.mouseReleased)
+        e.stopPropagation()
+        new MoveHandler(e,this.props.sequence,this.div,()=>{
+            this.setState({seq:this.props.sequence})
+        })
     }
-    mouseMoved = (e) => {
-        this.props.sequence.position.x = e.clientX - this.offsetX
-        this.props.sequence.position.y = e.clientY - this.offsetY
-        this.setState({seq:this.props.sequence})
+
+
+    resizePressed = (e) => {
+        e.stopPropagation()
+        new ResizeHandler(e,this.props.sequence, this.div, ()=>{
+            this.setState({seq:this.props.sequence})
+        })
     }
-    mouseReleased = (e) => {
-        window.removeEventListener('mousemove',this.mouseMoved)
-        window.removeEventListener('mouseup',this.mouseReleased)
-    }
+
     render() {
+        console.log("render")
         return <div className="sequence-view" style={{
             position:'absolute',
             left:this.props.sequence.position.x,
             top:this.props.sequence.position.y,
+            width: this.props.sequence.dimension.w,
+            height: this.props.sequence.dimension.h,
             display:'flex',
             flexDirection:'column-reverse',
         }}
                     onMouseDown={this.mousePressed}
                     ref={(div)=>this.div = div}
         >
-            <div>
+            <div className={'hbox'}>
                 <button onClick={this.movePitchUp}>up</button>
                 <button onClick={this.movePitchDown}>down</button>
+                <div className={'spacer'}></div>
+                <button onMouseDown={this.resizePressed}>resize</button>
             </div>
             {
                 this.renderRows(this.props.sequence)
