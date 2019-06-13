@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="make windows draggable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,31 +17,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
-              <caret line="236" selection-start-line="236" selection-end-line="236" />
+            <state relative-caret-position="331">
+              <caret line="128" column="5" lean-forward="true" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <element signature="n#!!block;n#isNoteSelected#0;n#Sequence#0" />
-                <element signature="e#521#557#0" />
+                <element signature="n#!!block;n#isNoteAt#0;n#Sequence#0" />
+                <element signature="n#!!block;n#toggleNoteAt#0;n#Sequence#0" />
                 <element signature="n#!!block;n#clear#0;n#Sequence#0" />
                 <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-                <element signature="n#SequenceRow#0" />
+                <element signature="e#950#2348#0" />
                 <element signature="n#SequenceNote#0" />
-                <element signature="e#3808#3847#0" />
-                <element signature="e#3871#3958#0" />
-                <element signature="e#3981#4067#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="95">
               <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
             </state>
           </provider>
@@ -80,8 +77,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
@@ -91,7 +88,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -115,6 +112,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RunDashboard">
@@ -142,6 +140,7 @@
       <workItem from="1560054759221" duration="6487000" />
       <workItem from="1560193170491" duration="11907000" />
       <workItem from="1560298939593" duration="3557000" />
+      <workItem from="1560459787740" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -210,25 +209,26 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21951000" />
+    <option name="totallyTimeSpent" value="22575000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1341" height="1440" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="npm" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.24947146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32938564" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32891566" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32864544" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -259,29 +259,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="236" selection-start-line="236" selection-end-line="236" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <element signature="n#!!block;n#isNoteSelected#0;n#Sequence#0" />
-            <element signature="e#521#557#0" />
-            <element signature="n#!!block;n#clear#0;n#Sequence#0" />
-            <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-            <element signature="n#SequenceRow#0" />
-            <element signature="n#SequenceNote#0" />
-            <element signature="e#3808#3847#0" />
-            <element signature="e#3871#3958#0" />
-            <element signature="e#3981#4067#0" />
-          </folding>
+        <state relative-caret-position="95">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
+    <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        <state relative-caret-position="331">
+          <caret line="128" column="5" lean-forward="true" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <element signature="n#!!block;n#isNoteAt#0;n#Sequence#0" />
+            <element signature="n#!!block;n#toggleNoteAt#0;n#Sequence#0" />
+            <element signature="n#!!block;n#clear#0;n#Sequence#0" />
+            <element signature="n#!!block;n#fill#0;n#Sequence#0" />
+            <element signature="e#950#2348#0" />
+            <element signature="n#SequenceNote#0" />
+          </folding>
         </state>
       </provider>
     </entry>

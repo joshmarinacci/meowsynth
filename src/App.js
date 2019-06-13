@@ -9,6 +9,8 @@ class Sequence {
         this.title = opts.title
         this.position = opts.position || { x: 0, y: 0}
         this.pitches = opts.pitches
+        this.startPitch = opts.startPitch
+        this.pitchCount = opts.pitchCount
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
         this.instrument = opts.instrument
     }
@@ -39,6 +41,8 @@ const sequences = [
             y:30,
         },
         pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
+        startPitch:0,
+        pitchCount:2,
         instrument:{
             name:'synth1',
             synth: new Tone.MonoSynth(
@@ -65,6 +69,8 @@ const sequences = [
             y:300,
         },
         pitches:['C3','F3'],
+        startPitch:0,
+        pitchCount:2,
         instrument:{
             name:'drum',
             synth: new Tone.MonoSynth(
@@ -87,6 +93,22 @@ const sequences = [
 ]
 
 class SequenceView extends Component {
+    movePitchUp = () => {
+        const seq = this.props.sequence
+        if(seq.startPitch + seq.pitchCount < seq.pitches.length) {
+            seq.startPitch +=1
+            this.setState({seq:this.state.seq})
+        }
+    }
+    movePitchDown = () => {
+        const seq = this.props.sequence
+        if(seq.startPitch > 0) {
+            seq.startPitch -= 1
+            this.setState({seq:this.state.seq})
+        }
+
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -125,20 +147,30 @@ class SequenceView extends Component {
                     onMouseDown={this.mousePressed}
                     ref={(div)=>this.div = div}
         >
-            <div><button>up</button><button>down</button></div>
+            <div>
+                <button onClick={this.movePitchUp}>up</button>
+                <button onClick={this.movePitchDown}>down</button>
+            </div>
             {
-                this.props.sequence.pitches.map((pitch,i)=>{
-                    return <SequenceRow key={i}
-                                        pitch={pitch}
-                                        row={i}
-                                        sequence={this.props.sequence}
-                                        onToggleNote={(col)=>this.toggleNote(col,pitch,i)}
-                                        column={this.props.column}
-                    />
-                })
+                this.renderRows(this.props.sequence)
             }
             <div className={"title"}>{this.props.sequence.title}</div>
         </div>
+    }
+
+    renderRows(seq) {
+        const rows = []
+        for(let i=seq.startPitch; i<seq.startPitch+seq.pitchCount; i++) {
+            const pitch = seq.pitches[i]
+            rows.push(<SequenceRow key={i}
+                                   pitch={pitch}
+                                   row={i}
+                                   sequence={seq}
+                                   onToggleNote={(col)=>this.toggleNote(col,pitch,i)}
+                                   column={this.props.column}
+            />)
+        }
+        return rows
     }
 }
 
