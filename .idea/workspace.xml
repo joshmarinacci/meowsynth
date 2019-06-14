@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="make windows draggable">
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,15 +19,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="128" column="5" lean-forward="true" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+            <state relative-caret-position="406">
+              <caret line="111" column="67" lean-forward="true" selection-start-line="111" selection-start-column="67" selection-end-line="111" selection-end-column="67" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="n#!!block;n#isNoteAt#0;n#Sequence#0" />
                 <element signature="n#!!block;n#toggleNoteAt#0;n#Sequence#0" />
                 <element signature="n#!!block;n#clear#0;n#Sequence#0" />
                 <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-                <element signature="e#950#2348#0" />
+                <element signature="n#!!block;n#render#0;n#SequenceView#0" />
+                <element signature="e#4607#5549#0" />
+                <element signature="e#5087#5382#0" />
                 <element signature="n#SequenceNote#0" />
               </folding>
             </state>
@@ -38,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+            <state relative-caret-position="190">
+              <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -66,6 +67,14 @@
       <find>synth</find>
       <find>instrument.</find>
       <find>start</find>
+      <find>movehandler</find>
+      <find>now at</find>
+      <find>now size</find>
+      <find>visiblerows</find>
+      <find>visiblerow</find>
+      <find>dimension</find>
+      <find>resizehandler</find>
+      <find>resize</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,7 +149,7 @@
       <workItem from="1560054759221" duration="6487000" />
       <workItem from="1560193170491" duration="11907000" />
       <workItem from="1560298939593" duration="3557000" />
-      <workItem from="1560459787740" duration="624000" />
+      <workItem from="1560459787740" duration="3635000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -205,11 +214,25 @@
       <option name="project" value="LOCAL" />
       <updated>1560304423799</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add buttons to move the pitches up and down">
+      <created>1560460451780</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1560460451780</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add resizing&#10;encapsulate dragging behavior into classes">
+      <created>1560461460122</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1560461460122</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22575000" />
+    <option name="totallyTimeSpent" value="25586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1341" height="1440" extended-state="6" />
@@ -228,7 +251,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32864544" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32864544" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -246,7 +269,9 @@
     <MESSAGE value="change beats" />
     <MESSAGE value="move more work into the sequence view" />
     <MESSAGE value="make windows draggable" />
-    <option name="LAST_COMMIT_MESSAGE" value="make windows draggable" />
+    <MESSAGE value="add buttons to move the pitches up and down" />
+    <MESSAGE value="add resizing&#10;encapsulate dragging behavior into classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="add resizing&#10;encapsulate dragging behavior into classes" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/index.js">
@@ -261,22 +286,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        <state relative-caret-position="190">
+          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="128" column="5" lean-forward="true" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+        <state relative-caret-position="406">
+          <caret line="111" column="67" lean-forward="true" selection-start-line="111" selection-start-column="67" selection-end-line="111" selection-end-column="67" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="n#!!block;n#isNoteAt#0;n#Sequence#0" />
             <element signature="n#!!block;n#toggleNoteAt#0;n#Sequence#0" />
             <element signature="n#!!block;n#clear#0;n#Sequence#0" />
             <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-            <element signature="e#950#2348#0" />
+            <element signature="n#!!block;n#render#0;n#SequenceView#0" />
+            <element signature="e#4607#5549#0" />
+            <element signature="e#5087#5382#0" />
             <element signature="n#SequenceNote#0" />
           </folding>
         </state>

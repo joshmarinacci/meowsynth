@@ -8,7 +8,7 @@ class Sequence {
     constructor(opts) {
         this.title = opts.title
         this.position = opts.position || { x: 0, y: 0}
-        this.dimension = { w: 100, h: 100 }
+        this.dimension = { w: 400, h: 100 }
         this.pitches = opts.pitches
         this.startPitch = opts.startPitch
         this.pitchCount = opts.pitchCount
@@ -97,6 +97,7 @@ class ResizeHandler {
     constructor(e, sequence, div, callback) {
         this.callback = callback
         this.seq = sequence
+        this.div = div
         this.resizeX = e.clientX - div.getBoundingClientRect().x
         this.resizeY = e.clientY - div.getBoundingClientRect().y
         this.resizeW = div.getBoundingClientRect().width
@@ -106,11 +107,9 @@ class ResizeHandler {
     }
 
     resizeMoved = (e) => {
-        const width = e.clientX - this.resizeX + this.resizeW
-        const height = e.clientY - this.resizeY + this.resizeH
-        this.seq.dimension.w = width
-        this.seq.dimension.h = height
-        this.callback()
+        let width = e.clientX - this.div.getBoundingClientRect().x
+        let height = e.clientY - this.div.getBoundingClientRect().y
+        this.callback({w:width,h:height})
     }
 
     resizeReleased = (e) => {
@@ -133,7 +132,7 @@ class MoveHandler {
     mouseMoved = (e) => {
         this.sequence.position.x = e.clientX - this.offsetX
         this.sequence.position.y = e.clientY - this.offsetY
-        this.callback()
+        this.callback(this.sequence.position)
     }
     mouseReleased = (e) => {
         window.removeEventListener('mousemove',this.mouseMoved)
@@ -161,7 +160,8 @@ class SequenceView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            seq:this.props.sequence
+            seq:this.props.sequence,
+            visibleCols:10,
         }
     }
     toggleNote = (col, pitch, row) => {
@@ -173,7 +173,7 @@ class SequenceView extends Component {
 
     mousePressed = (e) => {
         e.stopPropagation()
-        new MoveHandler(e,this.props.sequence,this.div,()=>{
+        new MoveHandler(e,this.props.sequence,this.div,({x,y})=>{
             this.setState({seq:this.props.sequence})
         })
     }
@@ -181,13 +181,20 @@ class SequenceView extends Component {
 
     resizePressed = (e) => {
         e.stopPropagation()
-        new ResizeHandler(e,this.props.sequence, this.div, ()=>{
-            this.setState({seq:this.props.sequence})
+        new ResizeHandler(e,this.props.sequence, this.div, ({w,h})=>{
+            const seq = this.props.sequence
+            const quant = 24
+            w = Math.floor(w/quant)*quant
+            h = Math.floor(h/quant)*quant
+            seq.dimension.w = w
+            seq.dimension.h = h
+            const rows = Math.floor(h/24) -2
+            if(rows <= seq.pitches.length) seq.pitchCount = rows
+            this.setState({seq:this.props.sequence, visibleCols: w/24-4})
         })
     }
 
     render() {
-        console.log("render")
         return <div className="sequence-view" style={{
             position:'absolute',
             left:this.props.sequence.position.x,
@@ -204,7 +211,7 @@ class SequenceView extends Component {
                 <button onClick={this.movePitchUp}>up</button>
                 <button onClick={this.movePitchDown}>down</button>
                 <div className={'spacer'}></div>
-                <button onMouseDown={this.resizePressed}>resize</button>
+                <button onMouseDown={this.resizePressed}>_|</button>
             </div>
             {
                 this.renderRows(this.props.sequence)
@@ -215,7 +222,8 @@ class SequenceView extends Component {
 
     renderRows(seq) {
         const rows = []
-        for(let i=seq.startPitch; i<seq.startPitch+seq.pitchCount; i++) {
+        const end = seq.startPitch+seq.pitchCount
+        for(let i=seq.startPitch; i<end; i++) {
             const pitch = seq.pitches[i]
             rows.push(<SequenceRow key={i}
                                    pitch={pitch}
@@ -223,6 +231,7 @@ class SequenceView extends Component {
                                    sequence={seq}
                                    onToggleNote={(col)=>this.toggleNote(col,pitch,i)}
                                    column={this.props.column}
+                                   visibleColumns={this.state.visibleCols}
             />)
         }
         return rows
@@ -232,7 +241,8 @@ class SequenceView extends Component {
 class SequenceRow extends Component {
     render() {
         const beats = []
-        for(let i=0; i<SEQUENCE_LENGTH; i++) {
+        const len = Math.min(this.props.visibleColumns,SEQUENCE_LENGTH)
+        for(let i=0; i<len; i++) {
             const selected = this.props.sequence.isNoteAt(this.props.row,i)
             const active = this.props.column === i
             beats.push(<SequenceNote key={i} beat={i} row={this}
