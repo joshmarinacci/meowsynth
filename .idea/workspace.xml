@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="">
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="fix resizing bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,31 +16,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="111" column="67" lean-forward="true" selection-start-line="111" selection-start-column="67" selection-end-line="111" selection-end-column="67" />
+            <state relative-caret-position="315">
+              <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <element signature="n#!!block;n#isNoteAt#0;n#Sequence#0" />
-                <element signature="n#!!block;n#toggleNoteAt#0;n#Sequence#0" />
-                <element signature="n#!!block;n#clear#0;n#Sequence#0" />
-                <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-                <element signature="n#!!block;n#render#0;n#SequenceView#0" />
-                <element signature="e#4607#5549#0" />
-                <element signature="e#5087#5382#0" />
-                <element signature="n#SequenceNote#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+            <state relative-caret-position="358">
+              <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -64,17 +56,20 @@
       <find>togglenoteat</find>
       <find>title</find>
       <find>console.log</find>
-      <find>synth</find>
       <find>instrument.</find>
       <find>start</find>
       <find>movehandler</find>
       <find>now at</find>
       <find>now size</find>
-      <find>visiblerows</find>
       <find>visiblerow</find>
       <find>dimension</find>
-      <find>resizehandler</find>
       <find>resize</find>
+      <find>resizehandler</find>
+      <find>visiblerows</find>
+      <find>visiblecols</find>
+      <find>visiblecol</find>
+      <find>synth</find>
+      <find>8n</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -86,8 +81,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/App.css" />
       </list>
     </option>
   </component>
@@ -101,7 +96,9 @@
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -149,7 +146,7 @@
       <workItem from="1560054759221" duration="6487000" />
       <workItem from="1560193170491" duration="11907000" />
       <workItem from="1560298939593" duration="3557000" />
-      <workItem from="1560459787740" duration="3635000" />
+      <workItem from="1560459787740" duration="5872000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -228,14 +225,21 @@
       <option name="project" value="LOCAL" />
       <updated>1560461460122</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix resizing bugs">
+      <created>1560471354604</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1560471354604</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25586000" />
+    <option name="totallyTimeSpent" value="27823000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1341" height="1440" extended-state="6" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
@@ -251,7 +255,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32864544" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32864544" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -271,7 +275,8 @@
     <MESSAGE value="make windows draggable" />
     <MESSAGE value="add buttons to move the pitches up and down" />
     <MESSAGE value="add resizing&#10;encapsulate dragging behavior into classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="add resizing&#10;encapsulate dragging behavior into classes" />
+    <MESSAGE value="fix resizing bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix resizing bugs" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/index.js">
@@ -284,28 +289,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
+    <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        <state relative-caret-position="315">
+          <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="111" column="67" lean-forward="true" selection-start-line="111" selection-start-column="67" selection-end-line="111" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <element signature="n#!!block;n#isNoteAt#0;n#Sequence#0" />
-            <element signature="n#!!block;n#toggleNoteAt#0;n#Sequence#0" />
-            <element signature="n#!!block;n#clear#0;n#Sequence#0" />
-            <element signature="n#!!block;n#fill#0;n#Sequence#0" />
-            <element signature="n#!!block;n#render#0;n#SequenceView#0" />
-            <element signature="e#4607#5549#0" />
-            <element signature="e#5087#5382#0" />
-            <element signature="n#SequenceNote#0" />
-          </folding>
+        <state relative-caret-position="358">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
         </state>
       </provider>
     </entry>
