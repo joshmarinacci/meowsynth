@@ -12,6 +12,7 @@ class Sequence {
         this.pitches = opts.pitches
         this.startPitch = opts.startPitch
         this.pitchCount = opts.pitchCount
+        this.pitched = opts.pitched || false
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
         this.instrument = opts.instrument
     }
@@ -34,61 +35,133 @@ class Sequence {
         this.notes.fill(1)
     }
 }
+const SYNTHS = {
+    kalimba: new Tone.FMSynth({
+        "harmonicity":8,
+        "modulationIndex": 2,
+        "oscillator" : {
+            "type": "sine"
+        },
+        "envelope": {
+            "attack": 0.001,
+            "decay": 2,
+            "sustain": 0.1,
+            "release": 2
+        },
+        "modulation" : {
+            "type" : "square"
+        },
+        "modulationEnvelope" : {
+            "attack": 0.002,
+            "decay": 0.2,
+            "sustain": 0,
+            "release": 0.2
+        }
+    }).toMaster(),
+    marimba: new Tone.Synth({
+        "oscillator": {
+            "partials": [
+                1,
+                0,
+                2,
+                0,
+                3
+            ]
+        },
+        "envelope": {
+            "attack": 0.001,
+            "decay": 1.2,
+            "sustain": 0,
+            "release": 1.2
+        }
+    }).toMaster(),
+    fatsawtooth: new Tone.MonoSynth({
+            oscillator : {
+                type : 'fatsawtooth',
+            },
+            envelope : {
+                attack : 0.05 ,
+                decay : 0.3 ,
+                sustain : 0.4 ,
+                release : 0.8
+            },
+        }).toMaster(),
+    base: new Tone.MonoSynth({
+        "oscillator": {
+            "type": "fmsquare5",
+            "modulationType" : "triangle",
+            "modulationIndex" : 2,
+            "harmonicity" : 0.501
+        },
+        "filter": {
+            "Q": 1,
+            "type": "lowpass",
+            "rolloff": -24
+        },
+        "envelope": {
+            "attack": 0.01,
+            "decay": 0.1,
+            "sustain": 0.4,
+            "release": 2
+        },
+        "filterEnvelope": {
+            "attack": 0.01,
+            "decay": 0.1,
+            "sustain": 0.8,
+            "release": 1.5,
+            "baseFrequency": 50,
+            "octaves": 4.4
+        }
+    }).toMaster(),
+    slap: new Tone.NoiseSynth({
+        "noise": {
+            "type": "white",
+            "playbackRate" : 5
+        },
+        "envelope": {
+            "attack": 0.001,
+            "decay": 0.3,
+            "sustain": 0,
+            "release": 0.3
+        }
+    }).toMaster(),
+}
+
 const sequences = [
     new Sequence({
         title:'synth',
-        position: {
-            x:10,
-            y:30,
-        },
+        position: { x:10, y:30, },
         pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
         startPitch:0,
         pitchCount:2,
+        pitched:true,
         instrument:{
             name:'synth1',
-            synth: new Tone.MonoSynth(
-                {
-                    oscillator : {
-                        type : 'fatsawtooth',
-                    }
-                    ,
-                    envelope : {
-                        attack : 0.05 ,
-                        decay : 0.3 ,
-                        sustain : 0.4 ,
-                        release : 0.8
-                    }
-                    ,
-                }
-            ).toMaster()
+            synth: SYNTHS.kalimba
         },
     }),
     new Sequence({
-        title:'drum',
-        position:{
-            x:10,
-            y:300,
-        },
-        pitches:['C3','F3'],
+        title:'base',
+        position:{ x:10, y:300, },
+        pitches:['C3','C4'],
         startPitch:0,
         pitchCount:2,
+        pitched:true,
         instrument:{
             name:'drum',
-            synth: new Tone.MonoSynth(
-                {
-                    oscillator : {
-                        type : 'fatsawtooth',
-                    }
-                    ,
-                    envelope : {
-                        attack : 0.05 ,
-                        decay : 0.3 ,
-                        sustain : 0.4 ,
-                        release : 0.8
-                    }
-                    ,
-                }
-            ).toMaster()
+            synth: SYNTHS.base
+        }
+    }),
+    new Sequence({
+        title:'slap',
+        position: {  x:10,  y:300, },
+        pitches:['C4'],
+        startPitch:0,
+        pitched:false,
+        pitchCount:1,
+        instrument: {
+            name:'slap',
+            synth: SYNTHS.slap
         }
     })
 ]
@@ -165,9 +238,14 @@ class SequenceView extends Component {
         }
     }
     toggleNote = (col, pitch, row) => {
-        this.state.seq.instrument.synth.triggerAttackRelease(pitch,'4n')
-        this.state.seq.toggleNoteAt(row,col)
         const seq = this.state.seq
+        if(seq.pitched) {
+            seq.instrument.synth.triggerAttackRelease(pitch, '4n')
+        } else {
+            seq.instrument.synth.triggerAttackRelease('4n')
+        }
+
+        seq.toggleNoteAt(row,col)
         this.setState({seq:this.state.seq})
     }
 
@@ -298,8 +376,12 @@ export class App extends Component {
                     }
                     const val = seq.notes[index]
                     if (val) {
-                        // console.log("play", seq.title,pitch)
-                        seq.instrument.synth.triggerAttackRelease(pitch, "8n");
+
+                        if(seq.pitched) {
+                            seq.instrument.synth.triggerAttackRelease(pitch, '8n')
+                        } else {
+                            seq.instrument.synth.triggerAttackRelease('8n')
+                        }
                     }
                 })
             })
