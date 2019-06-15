@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
-import './App.css';
+import React, {Component} from 'react'
+import './App.css'
 import Tone from "tone"
+import {ResizeHandler} from './ResizeHandler'
+import {MoveHandler} from './MoveHandler'
 
 const SEQUENCE_LENGTH = 32
 
@@ -14,6 +16,7 @@ class Sequence {
         this.pitchCount = opts.pitchCount
         this.pitched = opts.pitched || false
         this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
+        this.maxNotes = 4
         this.instrument = opts.instrument
     }
     isNoteAt(pitch, col) {
@@ -33,6 +36,18 @@ class Sequence {
     }
     fill() {
         this.notes.fill(1)
+    }
+    playColumn(col) {
+        this.pitches.forEach((pitch,row) => {
+            const val = this.isNoteAt(row,col%this.maxNotes)
+            if (val) {
+                if(this.pitched) {
+                    this.instrument.synth.triggerAttackRelease(pitch, '8n')
+                } else {
+                    this.instrument.synth.triggerAttackRelease('8n')
+                }
+            }
+        })
     }
 }
 const SYNTHS = {
@@ -166,53 +181,6 @@ const sequences = [
     })
 ]
 
-class ResizeHandler {
-    constructor(e, sequence, div, callback) {
-        this.callback = callback
-        this.seq = sequence
-        this.div = div
-        this.resizeX = e.clientX - div.getBoundingClientRect().x
-        this.resizeY = e.clientY - div.getBoundingClientRect().y
-        this.resizeW = div.getBoundingClientRect().width
-        this.resizeH = div.getBoundingClientRect().height
-        window.addEventListener('mousemove',this.resizeMoved)
-        window.addEventListener('mouseup',this.resizeReleased)
-    }
-
-    resizeMoved = (e) => {
-        let width = e.clientX - this.div.getBoundingClientRect().x
-        let height = e.clientY - this.div.getBoundingClientRect().y
-        this.callback({w:width,h:height})
-    }
-
-    resizeReleased = (e) => {
-        window.removeEventListener('mousemove',this.resizeMoved)
-        window.removeEventListener('mouseup',this.resizeReleased)
-    }
-
-}
-
-class MoveHandler {
-    constructor(e, sequence, div, callback) {
-        this.sequence = sequence
-        this.callback = callback
-        this.offsetX = e.clientX - div.getBoundingClientRect().x
-        this.offsetY = e.clientY - div.getBoundingClientRect().y
-        window.addEventListener('mousemove',this.mouseMoved)
-        window.addEventListener('mouseup',this.mouseReleased)
-    }
-
-    mouseMoved = (e) => {
-        this.sequence.position.x = e.clientX - this.offsetX
-        this.sequence.position.y = e.clientY - this.offsetY
-        this.callback(this.sequence.position)
-    }
-    mouseReleased = (e) => {
-        window.removeEventListener('mousemove',this.mouseMoved)
-        window.removeEventListener('mouseup',this.mouseReleased)
-    }
-}
-
 class SequenceView extends Component {
     movePitchUp = () => {
         const seq = this.props.sequence
@@ -234,7 +202,7 @@ class SequenceView extends Component {
         super(props)
         this.state = {
             seq:this.props.sequence,
-            visibleCols:10,
+            visibleCols:4,
         }
     }
     toggleNote = (col, pitch, row) => {
@@ -268,7 +236,9 @@ class SequenceView extends Component {
             seq.dimension.h = h
             const rows = Math.floor(h/24) -2
             if(rows <= seq.pitches.length) seq.pitchCount = rows
-            this.setState({seq:this.props.sequence, visibleCols: w/24-4})
+            const vc = w/24-4
+            this.props.sequence.maxNotes = vc
+            this.setState({seq:this.props.sequence, visibleCols: vc})
         })
     }
 
@@ -319,10 +289,10 @@ class SequenceView extends Component {
 class SequenceRow extends Component {
     render() {
         const beats = []
-        const len = Math.min(this.props.visibleColumns,SEQUENCE_LENGTH)
+        const len = this.props.sequence.maxNotes
         for(let i=0; i<len; i++) {
             const selected = this.props.sequence.isNoteAt(this.props.row,i)
-            const active = this.props.column === i
+            const active = (this.props.column%this.props.sequence.maxNotes) === i
             beats.push(<SequenceNote key={i} beat={i} row={this}
                                      selected={selected}
                                      active={active}
@@ -366,35 +336,21 @@ export class App extends Component {
         }
         const beats = []
         for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
-        const loop = new Tone.Sequence((time, col) => {
-            this.setState({column:col})
+        const loop = new Tone.Sequence((time) => {
             sequences.forEach((seq)=>{
-                seq.pitches.forEach((pitch,row) => {
-                    const index = row * SEQUENCE_LENGTH + col
-                    if (index > seq.notes.length - 1) {
-                        return false
-                    }
-                    const val = seq.notes[index]
-                    if (val) {
-
-                        if(seq.pitched) {
-                            seq.instrument.synth.triggerAttackRelease(pitch, '8n')
-                        } else {
-                            seq.instrument.synth.triggerAttackRelease('8n')
-                        }
-                    }
-                })
+                seq.playColumn(this.state.column)
             })
+            this.setState({column:this.state.column+1})
 
         }, beats, "8n")
             .start(0)
 
         // synth.triggerAttackRelease("C4", "8n");
         Tone.Transport.on("stop", () => {
-            this.setState({playing:false})
+            this.setState({playing:false, column:0})
         })
         Tone.Transport.on("start", () => {
-            this.setState({playing:true})
+            this.setState({playing:true, column:0})
         })
         // Tone.Transport.start()
     }
