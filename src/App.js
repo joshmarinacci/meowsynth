@@ -337,6 +337,15 @@ export class App extends Component {
                         <LoadButton onLoad={doc=> this.setState({doc:doc}) }/>
                         <LoginButton/>
                     </div>
+                    <div className={"toolbar hbox"}>
+                        <label>title</label>
+                        <input type="text" value={this.state.doc.title}
+                               onChange={e => {
+                                   this.state.doc.title = e.target.value
+                                   this.setState({doc:this.state.doc})
+                               }}
+                        />
+                    </div>
                     <DialogContainer/>
                 </div>
                 </DialogContext.Provider>

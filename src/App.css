@@ -1,5 +1,5 @@
 .layout-canvas {
-    top: 0px;
+    top: 2em;
     position: absolute;
     left:0;
     width: 100%;
@@ -46,6 +46,7 @@
     border: 1px solid #ccc;
     z-index: 1;
     position: relative;
+    background-color: aliceblue;
 }
 
 
