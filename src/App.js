@@ -6,7 +6,7 @@ import {MoveHandler} from './MoveHandler'
 import {} from "./SequenceViews"
 import {Sequence, SEQUENCE_LENGTH} from './sequence.js'
 import {SequenceView} from './SequenceViews.js'
-import {LoginButton} from "./docserver.js"
+import {DocServerAPI, DocServerContext, LoginButton} from "./docserver.js"
 
 const SYNTHS = {
     kalimba: new Tone.FMSynth({
@@ -159,6 +159,7 @@ export class App extends Component {
             column:0,
             playing:false,
         }
+        this.docserver = new DocServerAPI("https://docs.josh.earth/")
         const beats = []
         for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
         const loop = new Tone.Sequence((time) => {
@@ -185,30 +186,31 @@ export class App extends Component {
 
     render() {
         return (
-            <div>
-                <div className="layout-canvas">
-                    {sequences.map((seq, i) => {
-                        return <SequenceView sequence={seq}
-                                             key={i}
-                                             instrument={this.synth}
-                                             column={this.state.column}/>
-                    })}
+            <DocServerContext.Provider value={this.docserver}>
+                <div>
+                    <div className="layout-canvas">
+                        {sequences.map((seq, i) => {
+                            return <SequenceView sequence={seq}
+                                                 key={i}
+                                                 instrument={this.synth}
+                                                 column={this.state.column}/>
+                        })}
+                    </div>
+                    <div className={"toolbar hbox"}>
+                        <button onClick={this.togglePlaying}>
+                            {this.state.playing?"stop":"start"}
+                        </button>
+                        <button onClick={this.clearBoard}>
+                            clear
+                        </button>
+                        <button onClick={this.fillBoard}>
+                            BBEE AA SSAAVVAAGGEE!!!!!!
+                        </button>
+                        <span className={"spacer"}>spacer</span>
+                        <LoginButton/>
+                    </div>
                 </div>
-                <div className={"toolbar hbox"}>
-                    <button onClick={this.togglePlaying}>
-                        {this.state.playing?"stop":"start"}
-                    </button>
-                    <button onClick={this.clearBoard}>
-                        clear
-                    </button>
-                    <button onClick={this.fillBoard}>
-                        BBEE AA SSAAVVAAGGEE!!!!!!
-                    </button>
-                    <span className={"spacer"}>spacer</span>
-                    <LoginButton/>
-                </div>
-
-            </div>
+            </DocServerContext.Provider>
         );
     }
 }

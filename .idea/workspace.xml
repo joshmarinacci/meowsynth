@@ -32,12 +32,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="update some deps">
-      <change afterPath="$PROJECT_DIR$/src/SequenceViews.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docserver.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sequence.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="split code into more files">
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docserver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/docserver.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +106,7 @@
       <workItem from="1560298939593" duration="3557000" />
       <workItem from="1560459787740" duration="5872000" />
       <workItem from="1586479228039" duration="500000" />
-      <workItem from="1587048279690" duration="583000" />
+      <workItem from="1587048279690" duration="941000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -202,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587048474253</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="split code into more files">
+      <created>1587049379753</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1587049379753</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +235,8 @@
     <MESSAGE value="add resizing&#10;encapsulate dragging behavior into classes" />
     <MESSAGE value="fix resizing bugs" />
     <MESSAGE value="update some deps" />
-    <option name="LAST_COMMIT_MESSAGE" value="update some deps" />
+    <MESSAGE value="split code into more files" />
+    <option name="LAST_COMMIT_MESSAGE" value="split code into more files" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1586479829979">
@@ -250,5 +255,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1586479829977" />
+    <state x="385" y="210" key="run.anything.popup" timestamp="1587049446249">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049446249" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1587049381260">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049381260" />
   </component>
 </project>
