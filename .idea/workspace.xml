@@ -33,6 +33,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="actually log in and out">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,11 +61,7 @@
     <auto-save>true</auto-save>
   </component>
   <component name="MacroExpansionManager">
-    <option name="directoryName" value="0lnptnbl" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="directoryName" value="scm34h12" />
   </component>
   <component name="ProjectId" id="1aKLEUXik12bN1kOAcKkOuyzJSp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -79,6 +76,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -235,6 +233,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
@@ -274,9 +273,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049446249" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1587049381260">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup" timestamp="1587054393693">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049381260" />
+    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1587054393693" />
   </component>
 </project>

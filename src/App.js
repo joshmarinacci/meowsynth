@@ -100,44 +100,6 @@ const SYNTHS = {
     }).toMaster(),
 }
 
-const sequences = [
-    new Sequence({
-        title:'synth',
-        position: { x:10, y:30, },
-        pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
-        startPitch:0,
-        pitchCount:2,
-        pitched:true,
-        instrument:{
-            name:'synth1',
-            synth: SYNTHS.kalimba
-        },
-    }),
-    new Sequence({
-        title:'base',
-        position:{ x:10, y:200, },
-        pitches:['C3','C4'],
-        startPitch:0,
-        pitchCount:2,
-        pitched:true,
-        instrument:{
-            name:'drum',
-            synth: SYNTHS.base
-        }
-    }),
-    new Sequence({
-        title:'slap',
-        position: {  x:10,  y:400, },
-        pitches:['C4'],
-        startPitch:0,
-        pitched:false,
-        pitchCount:1,
-        instrument: {
-            name:'slap',
-            synth: SYNTHS.slap
-        }
-    })
-]
 
 const SaveButton = ({doc})=>{
     let ds = useContext(DocServerContext)
@@ -163,16 +125,60 @@ const SaveButton = ({doc})=>{
     }
 }
 
+function generateDefaultDoc() {
+    const sequences = [
+        new Sequence({
+            title:'synth',
+            position: { x:10, y:30, },
+            pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
+            startPitch:0,
+            pitchCount:2,
+            pitched:true,
+            instrument:{
+                name:'synth1',
+                synth: SYNTHS.kalimba
+            },
+        }),
+        new Sequence({
+            title:'base',
+            position:{ x:10, y:200, },
+            pitches:['C3','C4'],
+            startPitch:0,
+            pitchCount:2,
+            pitched:true,
+            instrument:{
+                name:'drum',
+                synth: SYNTHS.base
+            }
+        }),
+        new Sequence({
+            title:'slap',
+            position: {  x:10,  y:400, },
+            pitches:['C4'],
+            startPitch:0,
+            pitched:false,
+            pitchCount:1,
+            instrument: {
+                name:'slap',
+                synth: SYNTHS.slap
+            }
+        })
+    ]
+    return {
+        sequences:sequences
+    }
+}
+
 export class App extends Component {
     togglePlaying = () => {
         Tone.Transport.toggle()
     }
     clearBoard = () => {
-        sequences.forEach(seq => seq.clear())
+        this.state.doc.sequences.forEach(seq => seq.clear())
         this.setState({column:0})
     }
     fillBoard = () => {
-        sequences.forEach(seq => seq.fill())
+        this.state.doc.sequences.forEach(seq => seq.fill())
         this.setState({column:0})
     }
 
@@ -182,11 +188,14 @@ export class App extends Component {
             column:0,
             playing:false,
         }
+        if(!this.state.doc) {
+            this.state.doc = generateDefaultDoc()
+        }
         this.docserver = new DocServerAPI("https://docs.josh.earth/")
         const beats = []
         for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
         const loop = new Tone.Sequence((time) => {
-            sequences.forEach((seq)=>{
+            this.state.doc.sequences.forEach((seq)=>{
                 seq.playColumn(this.state.column)
             })
             this.setState({column:this.state.column+1})
@@ -212,7 +221,7 @@ export class App extends Component {
             <DocServerContext.Provider value={this.docserver}>
                 <div>
                     <div className="layout-canvas">
-                        {sequences.map((seq, i) => {
+                        {this.state.doc.sequences.map((seq, i) => {
                             return <SequenceView sequence={seq}
                                                  key={i}
                                                  instrument={this.synth}
@@ -230,7 +239,7 @@ export class App extends Component {
                             BBEE AA SSAAVVAAGGEE!!!!!!
                         </button>
                         <span className={"spacer"}>spacer</span>
-                        <SaveButton doc={sequences}/>
+                        <SaveButton doc={this.state.doc}/>
                         <LoginButton/>
                     </div>
                 </div>
