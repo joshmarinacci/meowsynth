@@ -101,6 +101,21 @@ export class DocServerAPI {
                 return res
             })
     }
+    delete(id) {
+        let params = {
+            type:'meowsynth',
+            mimetype:'application/json',
+            _id:id,
+        }
+        let query = '?'+ Object.keys(params).map(key => key+'='+params[key]).join("&")
+        let url = `${this.url}/docs/${this.getUsername()}/delete/${query}`
+        this._fetch(url, {
+            method:'POST'
+        }).then(res => res.json())
+            .then(res => {
+                console.log("final result",res)
+            })
+    }
 }
 
 export const DocServerContext = React.createContext()

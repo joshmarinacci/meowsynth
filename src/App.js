@@ -130,18 +130,29 @@ const SaveButton = ({doc, onSave})=>{
     }
 }
 
-const LoadFileButton = ({file})=>{
+const LoadFileButton = ({file, onLoad})=>{
+    let dm = useContext(DialogContext)
+    let ds = useContext(DocServerContext)
+    const doLoad = () =>
+        ds.load(file._id).then(new_doc => {
+            console.log("the new doc is",new_doc)
+            new_doc.sequences = new_doc.sequences.map(seq => {
+                return Sequence.fromJSONObject(seq,SYNTHS)
+            })
+            dm.hide()
+            onLoad(new_doc)
+        }
+    )
     return <button style={{
         padding:'1em'
-    }}>{file.title}</button>
+    }} onClick={doLoad}>{file.title}</button>
 }
 const DeleteFileButton = ({file}) => {
-    const doDelete = () => {
-        console.log("deleting",file);
-    }
+    let ds = useContext(DocServerContext)
+    const doDelete = () => ds.delete(file._id)
     return <button onClick={doDelete}>delete</button>
 }
-const OpenDocDialog = ({})=>{
+const OpenDocDialog = ({onLoad})=>{
     let dm = useContext(DialogContext)
     let ds = useContext(DocServerContext)
     let [files, setFiles] = useState([])
@@ -160,7 +171,7 @@ const OpenDocDialog = ({})=>{
         <div className="body">{
             files.map(file => {
                 return <div key={file._id}>
-                    <LoadFileButton file={file}/>
+                    <LoadFileButton file={file} onLoad={onLoad}/>
                     <DeleteFileButton file={file}/>
                 </div>
             })
@@ -179,7 +190,7 @@ const LoadButton = ({docid, onLoad}) => {
     }
 
     const doLoad = () => {
-        dm.show(<OpenDocDialog/>)
+        dm.show(<OpenDocDialog onLoad={onLoad}/>)
         // console.log("really loading the doc")
         // ds.load(docid).then(doc=>{
         //     console.log("the new is",doc)
