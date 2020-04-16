@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, useContext, useState, useEffect} from 'react'
 import './App.css'
 import Tone from "tone"
 import {ResizeHandler} from './ResizeHandler'
@@ -6,7 +6,7 @@ import {MoveHandler} from './MoveHandler'
 import {} from "./SequenceViews"
 import {Sequence, SEQUENCE_LENGTH} from './sequence.js'
 import {SequenceView} from './SequenceViews.js'
-import {DocServerAPI, DocServerContext, LoginButton} from "./docserver.js"
+import {DocServerAPI, DocServerContext, LOGIN, LoginButton} from "./docserver.js"
 
 const SYNTHS = {
     kalimba: new Tone.FMSynth({
@@ -139,6 +139,29 @@ const sequences = [
     })
 ]
 
+const SaveButton = ({doc})=>{
+    let ds = useContext(DocServerContext)
+    const [li, setLi] = useState(ds.isLoggedIn())
+    useEffect(()=>{
+        let cb = () => {
+            console.log('login changed')
+            setLi(ds.isLoggedIn())
+        }
+        ds.on(LOGIN,cb)
+        return () => {
+            console.log('rebuilding')
+            ds.off(LOGIN,cb)
+        }
+    },li)
+    const doSave = () => {
+        console.log('really saving the doc',doc)
+    }
+    if(ds.isLoggedIn()) {
+        return <button onClick={doSave}>save</button>
+    } else {
+        return <button disabled>save</button>
+    }
+}
 
 export class App extends Component {
     togglePlaying = () => {
@@ -207,6 +230,7 @@ export class App extends Component {
                             BBEE AA SSAAVVAAGGEE!!!!!!
                         </button>
                         <span className={"spacer"}>spacer</span>
+                        <SaveButton doc={sequences}/>
                         <LoginButton/>
                     </div>
                 </div>

@@ -32,9 +32,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="stub out the docserver api">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docserver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/docserver.js" afterDir="false" />
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="actually log in and out">
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +105,7 @@
       <workItem from="1560298939593" duration="3557000" />
       <workItem from="1560459787740" duration="5872000" />
       <workItem from="1586479228039" duration="500000" />
-      <workItem from="1587048279690" duration="1824000" />
+      <workItem from="1587048279690" duration="2154000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -213,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587049871078</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="actually log in and out">
+      <created>1587050674167</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1587050674167</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +250,8 @@
     <MESSAGE value="update some deps" />
     <MESSAGE value="split code into more files" />
     <MESSAGE value="stub out the docserver api" />
-    <option name="LAST_COMMIT_MESSAGE" value="stub out the docserver api" />
+    <MESSAGE value="actually log in and out" />
+    <option name="LAST_COMMIT_MESSAGE" value="actually log in and out" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1586479829979">
