@@ -42,17 +42,60 @@ export class DocServerAPI {
         window.removeEventListener('message', this.authCallback)
         this.fire(LOGIN, {})
     }
+    getAccessToken() {
+        return localStorage.getItem('access-token')
+    }
     getUsername() {
         return localStorage.getItem('username')
     }
     listDocs(filter) {
 
     }
-    saveDoc(doc) {
+    save(doc) {
+        let doc_text = JSON.stringify(doc, null, 4);
+        console.log("saving now",doc_text)
+        let params = {
+            type:'meowsynth',
+            mimetype:'application/json',
+            title:doc.title?doc.title:'untitled',
+        }
+        let query = '?'+ Object.keys(params).map(key => key+'='+params[key]).join("&")
 
+        return this._fetch(`${this.url}/docs/${this.getUsername()}/upload/${query}`,{
+            method:'POST',
+            body:doc_text,
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }).then(res=>res.json())
     }
-    loadDoc(id) {
-
+    _fetch(url, options={}) {
+        options.mode = 'cors'
+        options.cache = 'no-cache'
+        if (!options.headers) options.headers = {}
+        options.headers["access-key"] = this.getAccessToken()
+        console.log("fetching", url, 'with options', options)
+        return fetch(url, options)
+            .then(res => {
+                if (res.status === 404) throw new Error(res.statusText + " " + res.url)
+                return res
+            })
+    }
+    load(id) {
+        let url = `${this.url}/docs/${this.getUsername()}/data/${id}/latest/application/json/data.json`
+        return fetch(url,{
+            method:'GET',
+            headers: {
+                'Content-Type':'application/json'
+            }
+        })
+            .then(res => {
+                if (res.status === 404) throw new Error(res.statusText + " " + res.url)
+                return res
+            }).then(res => res.json()).then(res => {
+                console.log("the load result is",res)
+                return res
+            })
     }
 }
 

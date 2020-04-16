@@ -101,7 +101,7 @@ const SYNTHS = {
 }
 
 
-const SaveButton = ({doc})=>{
+const SaveButton = ({doc, onSave})=>{
     let ds = useContext(DocServerContext)
     const [li, setLi] = useState(ds.isLoggedIn())
     useEffect(()=>{
@@ -117,12 +117,37 @@ const SaveButton = ({doc})=>{
     },li)
     const doSave = () => {
         console.log('really saving the doc',doc)
+        ds.save(doc).then((res)=>{
+            console.log("saved with the result",res);
+            onSave(res)
+        })
     }
     if(ds.isLoggedIn()) {
         return <button onClick={doSave}>save</button>
     } else {
         return <button disabled>save</button>
     }
+}
+
+const LoadButton = ({docid, onLoad}) => {
+    let ds = useContext(DocServerContext)
+    if(!ds.isLoggedIn()) {
+        return <button disabled>load</button>
+    }
+
+    const doLoad = () => {
+        console.log("really loading the doc")
+        ds.load(docid).then(doc=>{
+            console.log("the new is",doc)
+            doc.sequences = doc.sequences.map(seq => {
+                return Sequence.fromJSONObject(seq,SYNTHS)
+            })
+            onLoad(doc)
+        })
+    }
+    return <button onClick={doLoad}>load</button>
+
+
 }
 
 function generateDefaultDoc() {
@@ -136,6 +161,7 @@ function generateDefaultDoc() {
             pitched:true,
             instrument:{
                 name:'synth1',
+                synthkey:'kalimba',
                 synth: SYNTHS.kalimba
             },
         }),
@@ -148,6 +174,7 @@ function generateDefaultDoc() {
             pitched:true,
             instrument:{
                 name:'drum',
+                synthkey:'base',
                 synth: SYNTHS.base
             }
         }),
@@ -160,12 +187,14 @@ function generateDefaultDoc() {
             pitchCount:1,
             instrument: {
                 name:'slap',
+                synthkey:'slap',
                 synth: SYNTHS.slap
             }
         })
     ]
     return {
-        sequences:sequences
+        title:'new synth doc',
+        sequences:sequences,
     }
 }
 
@@ -239,7 +268,21 @@ export class App extends Component {
                             BBEE AA SSAAVVAAGGEE!!!!!!
                         </button>
                         <span className={"spacer"}>spacer</span>
-                        <SaveButton doc={this.state.doc}/>
+                        <label>{this.state.doc.title}</label>
+                        <label>id={this.state.doc.docid}=</label>
+                        <SaveButton doc={this.state.doc} onSave={(res)=>{
+                            console.log('saved with this result',res)
+                            if(res.doc && res.doc._id) {
+                                console.log("new docid is",res.doc._id)
+                                this.state.doc.docid = res.doc._id
+                                this.setState({doc:this.state.doc})
+                            }
+                        }}/>
+                        <LoadButton docid={this.state.doc.docid} onLoad={doc=>{
+                            console.log("got the final",doc);
+                            doc.docid = this.state.doc.docid
+                            this.setState({doc:doc})
+                        }}/>
                         <LoginButton/>
                     </div>
                 </div>

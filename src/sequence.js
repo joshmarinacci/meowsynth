@@ -43,4 +43,43 @@ export class Sequence {
             }
         })
     }
+    toJSON() {
+        return {
+            type:'sequence',
+            title:this.title,
+            position:this.position,
+            dimension:this.dimension,
+            pitches:this.pitches.slice(),
+            startPitch:this.startPitch,
+            pitchCount:this.pitchCount,
+            pitched:this.pitched,
+            notes:this.notes.slice(),
+            maxNotes:this.maxNotes,
+            instrument:{
+                name:this.instrument.name,
+                synthkey:this.instrument.synthkey,
+            },
+        }
+    }
+
+    static fromJSONObject(seq, synth_map) {
+        console.log("processing sequence from",seq)
+        let opts = {
+            title:seq.title,
+            position:seq.position,
+            dimension:seq.dimension,
+            pitches:seq.pitches.slice(),
+            startPitch:seq.startPitch,
+            pitchCount:seq.pitchCount,
+            pitched:seq.pitched,
+            notes: seq.notes.slice(),
+            maxNotes:seq.maxNotes,
+            instrument:{
+                name:seq.instrument.name,
+                synthkey: seq.instrument.synthkey,
+                synth: synth_map[seq.instrument.synthkey]
+            },
+        }
+        return new Sequence(opts)
+    }
 }
