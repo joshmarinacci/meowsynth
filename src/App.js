@@ -7,6 +7,7 @@ import {} from "./SequenceViews"
 import {Sequence, SEQUENCE_LENGTH} from './sequence.js'
 import {SequenceView} from './SequenceViews.js'
 import {DocServerAPI, DocServerContext, LOGIN, LoginButton} from "./docserver.js"
+import {DialogContainer, DialogContext, DialogManager} from './gui.js'
 
 const SYNTHS = {
     kalimba: new Tone.FMSynth({
@@ -129,21 +130,64 @@ const SaveButton = ({doc, onSave})=>{
     }
 }
 
+const LoadFileButton = ({file})=>{
+    return <button style={{
+        padding:'1em'
+    }}>{file.title}</button>
+}
+const DeleteFileButton = ({file}) => {
+    const doDelete = () => {
+        console.log("deleting",file);
+    }
+    return <button onClick={doDelete}>delete</button>
+}
+const OpenDocDialog = ({})=>{
+    let dm = useContext(DialogContext)
+    let ds = useContext(DocServerContext)
+    let [files, setFiles] = useState([])
+    let [loaded,setLoaded] = useState(false)
+    useEffect(()=>{
+        if(!loaded) {
+            setLoaded(true)
+            ds.list("meowsynth").then(r => {
+                console.log("got the files", r.results)
+                setFiles(r.results)
+            })
+        }
+    })
+    return <div className="dialog">
+        <header>open a file</header>
+        <div className="body">{
+            files.map(file => {
+                return <div key={file._id}>
+                    <LoadFileButton file={file}/>
+                    <DeleteFileButton file={file}/>
+                </div>
+            })
+        }
+        </div>
+        <footer>
+            <button onClick={()=>dm.hide()}>dismiss</button>
+        </footer>
+    </div>
+}
 const LoadButton = ({docid, onLoad}) => {
     let ds = useContext(DocServerContext)
+    let dm = useContext(DialogContext)
     if(!ds.isLoggedIn()) {
         return <button disabled>load</button>
     }
 
     const doLoad = () => {
-        console.log("really loading the doc")
-        ds.load(docid).then(doc=>{
-            console.log("the new is",doc)
-            doc.sequences = doc.sequences.map(seq => {
-                return Sequence.fromJSONObject(seq,SYNTHS)
-            })
-            onLoad(doc)
-        })
+        dm.show(<OpenDocDialog/>)
+        // console.log("really loading the doc")
+        // ds.load(docid).then(doc=>{
+        //     console.log("the new is",doc)
+        //     doc.sequences = doc.sequences.map(seq => {
+        //         return Sequence.fromJSONObject(seq,SYNTHS)
+        //     })
+        //     onLoad(doc)
+        // })
     }
     return <button onClick={doLoad}>load</button>
 
@@ -248,6 +292,7 @@ export class App extends Component {
     render() {
         return (
             <DocServerContext.Provider value={this.docserver}>
+                <DialogContext.Provider value={new DialogManager()}>
                 <div>
                     <div className="layout-canvas">
                         {this.state.doc.sequences.map((seq, i) => {
@@ -278,14 +323,12 @@ export class App extends Component {
                                 this.setState({doc:this.state.doc})
                             }
                         }}/>
-                        <LoadButton docid={this.state.doc.docid} onLoad={doc=>{
-                            console.log("got the final",doc);
-                            doc.docid = this.state.doc.docid
-                            this.setState({doc:doc})
-                        }}/>
+                        <LoadButton onLoad={doc=> this.setState({doc:doc}) }/>
                         <LoginButton/>
                     </div>
+                    <DialogContainer/>
                 </div>
+                </DialogContext.Provider>
             </DocServerContext.Provider>
         );
     }

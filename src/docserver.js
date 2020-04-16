@@ -48,8 +48,12 @@ export class DocServerAPI {
     getUsername() {
         return localStorage.getItem('username')
     }
-    listDocs(filter) {
-
+    list(type) {
+        let url = `${this.url}/docs/${this.getUsername()}/search?type=${type}`;
+        return this._fetch(url).then(res => res.json()).then(res => {
+            console.log("got a list",res)
+            return res
+        })
     }
     save(doc) {
         let doc_text = JSON.stringify(doc, null, 4);

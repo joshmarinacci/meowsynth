@@ -32,11 +32,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="switch sequences to be a state doc">
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="start loading and saving to the server">
+      <change afterPath="$PROJECT_DIR$/src/gui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docserver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/docserver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sequence.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sequence.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -79,6 +81,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -226,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587056341276</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="start loading and saving to the server">
+      <created>1587065580465</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1587065580465</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +270,8 @@
     <MESSAGE value="stub out the docserver api" />
     <MESSAGE value="actually log in and out" />
     <MESSAGE value="switch sequences to be a state doc" />
-    <option name="LAST_COMMIT_MESSAGE" value="switch sequences to be a state doc" />
+    <MESSAGE value="start loading and saving to the server" />
+    <option name="LAST_COMMIT_MESSAGE" value="start loading and saving to the server" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1586479829979">
