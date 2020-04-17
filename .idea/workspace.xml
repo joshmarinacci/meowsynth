@@ -32,10 +32,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="add editable title">
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="fixed saving existing doc&#10;fix context wrapping">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docserver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/docserver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sequence.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sequence.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +127,7 @@
       <workItem from="1560459787740" duration="5872000" />
       <workItem from="1586479228039" duration="500000" />
       <workItem from="1587048279690" duration="2154000" />
-      <workItem from="1587081958365" duration="653000" />
+      <workItem from="1587081958365" duration="1729000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -275,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587070611558</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fixed saving existing doc&#10;fix context wrapping">
+      <created>1587082928012</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1587082928012</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +321,8 @@
     <MESSAGE value="add open file dialog" />
     <MESSAGE value="load and delete files from remote" />
     <MESSAGE value="add editable title" />
-    <option name="LAST_COMMIT_MESSAGE" value="add editable title" />
+    <MESSAGE value="fixed saving existing doc&#10;fix context wrapping" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed saving existing doc&#10;fix context wrapping" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1501" height="419" key="GridCell.Tab.0.bottom" timestamp="1587082144333">
@@ -348,10 +357,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049446249" />
-    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup" timestamp="1587082101526">
+    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup" timestamp="1587083502943">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049381260" />
-    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1587082101526" />
+    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1587083502943" />
   </component>
 </project>

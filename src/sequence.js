@@ -9,7 +9,12 @@ export class Sequence {
         this.startPitch = opts.startPitch
         this.pitchCount = opts.pitchCount
         this.pitched = opts.pitched || false
-        this.notes = new Array(SEQUENCE_LENGTH*this.pitches.length)
+        if(opts.notes) {
+            this.notes = opts.notes.slice()
+        } else {
+            this.notes = new Array(SEQUENCE_LENGTH * this.pitches.length)
+            this.notes.fill(false)
+        }
         this.maxNotes = 4
         this.instrument = opts.instrument
     }

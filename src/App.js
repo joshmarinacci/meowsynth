@@ -198,7 +198,7 @@ function generateDefaultDoc() {
     const sequences = [
         new Sequence({
             title:'synth',
-            position: { x:10, y:30, },
+            position: { x:10, y:100, },
             pitches:['C4','D4','E4','F4','G4','A4','B4','C5'],
             startPitch:0,
             pitchCount:2,
@@ -211,7 +211,7 @@ function generateDefaultDoc() {
         }),
         new Sequence({
             title:'base',
-            position:{ x:10, y:200, },
+            position:{ x:10, y:250, },
             pitches:['C3','C4'],
             startPitch:0,
             pitchCount:2,
@@ -261,27 +261,8 @@ class SequenceApp extends Component {
             column:0,
             playing:false,
         }
-        if(!this.state.doc) {
-            this.state.doc = generateDefaultDoc()
-        }
-        const beats = []
-        for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
-        const loop = new Tone.Sequence((time) => {
-            this.state.doc.sequences.forEach((seq)=>{
-                seq.playColumn(this.state.column)
-            })
-            this.setState({column:this.state.column+1})
-
-        }, beats, "8n")
-            .start(0)
-
-        // synth.triggerAttackRelease("C4", "8n");
-        Tone.Transport.on("stop", () => {
-            this.setState({playing:false, column:0})
-        })
-        Tone.Transport.on("start", () => {
-            this.setState({playing:true, column:0})
-        })
+        if(!this.state.doc) this.state.doc = generateDefaultDoc()
+        this.init_tone_loop()
         // Tone.Transport.start()
     }
 
@@ -332,6 +313,26 @@ class SequenceApp extends Component {
                     <DialogContainer/>
                 </div>
         );
+    }
+
+    init_tone_loop() {
+        const beats = []
+        for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
+        new Tone.Sequence((time) => {
+            this.state.doc.sequences.forEach((seq)=>{
+                seq.playColumn(this.state.column)
+            })
+            this.setState({column:this.state.column+1})
+        }, beats, "8n").start(0)
+
+        // synth.triggerAttackRelease("C4", "8n");
+        Tone.Transport.on("stop", () => {
+            this.setState({playing:false, column:0})
+        })
+        Tone.Transport.on("start", () => {
+            this.setState({playing:true, column:0})
+        })
+
     }
 }
 
