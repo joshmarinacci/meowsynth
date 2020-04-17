@@ -1,8 +1,6 @@
 import React, {Component, useContext, useState, useEffect} from 'react'
 import './App.css'
 import Tone from "tone"
-import {ResizeHandler} from './ResizeHandler'
-import {MoveHandler} from './MoveHandler'
 import {} from "./SequenceViews"
 import {Sequence, SEQUENCE_LENGTH} from './sequence.js'
 import {SequenceView} from './SequenceViews.js'
@@ -139,6 +137,7 @@ const LoadFileButton = ({file, onLoad})=>{
             new_doc.sequences = new_doc.sequences.map(seq => {
                 return Sequence.fromJSONObject(seq,SYNTHS)
             })
+            new_doc.docid = file._id
             dm.hide()
             onLoad(new_doc)
         }
@@ -189,17 +188,7 @@ const LoadButton = ({docid, onLoad}) => {
         return <button disabled>load</button>
     }
 
-    const doLoad = () => {
-        dm.show(<OpenDocDialog onLoad={onLoad}/>)
-        // console.log("really loading the doc")
-        // ds.load(docid).then(doc=>{
-        //     console.log("the new is",doc)
-        //     doc.sequences = doc.sequences.map(seq => {
-        //         return Sequence.fromJSONObject(seq,SYNTHS)
-        //     })
-        //     onLoad(doc)
-        // })
-    }
+    const doLoad = () => dm.show(<OpenDocDialog onLoad={onLoad}/>)
     return <button onClick={doLoad}>load</button>
 
 
@@ -253,7 +242,7 @@ function generateDefaultDoc() {
     }
 }
 
-export class App extends Component {
+class SequenceApp extends Component {
     togglePlaying = () => {
         Tone.Transport.toggle()
     }
@@ -275,7 +264,6 @@ export class App extends Component {
         if(!this.state.doc) {
             this.state.doc = generateDefaultDoc()
         }
-        this.docserver = new DocServerAPI("https://docs.josh.earth/")
         const beats = []
         for(let i=0; i<SEQUENCE_LENGTH; i++) beats.push(i)
         const loop = new Tone.Sequence((time) => {
@@ -297,13 +285,8 @@ export class App extends Component {
         // Tone.Transport.start()
     }
 
-    componentDidMount() {
-    }
-
     render() {
         return (
-            <DocServerContext.Provider value={this.docserver}>
-                <DialogContext.Provider value={new DialogManager()}>
                 <div>
                     <div className="layout-canvas">
                         {this.state.doc.sequences.map((seq, i) => {
@@ -348,10 +331,16 @@ export class App extends Component {
                     </div>
                     <DialogContainer/>
                 </div>
-                </DialogContext.Provider>
-            </DocServerContext.Provider>
         );
     }
 }
 
+export const App = ({})=>{
+    let [docserver] = useState(()=>new DocServerAPI("https://docs.josh.earth/"))
+    return <DocServerContext.Provider value={docserver}>
+    <DialogContext.Provider value={new DialogManager()}>
+        <SequenceApp/>
+    </DialogContext.Provider>
+    </DocServerContext.Provider>
+}
 export default App;

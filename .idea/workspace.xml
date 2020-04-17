@@ -32,9 +32,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="load and delete files from remote">
+    <list default="true" id="371ca6a7-c5fc-4141-8614-87ef813414f0" name="Default Changelist" comment="add editable title">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docserver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/docserver.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +76,8 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -89,6 +92,23 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -106,6 +126,7 @@
       <workItem from="1560459787740" duration="5872000" />
       <workItem from="1586479228039" duration="500000" />
       <workItem from="1587048279690" duration="2154000" />
+      <workItem from="1587081958365" duration="653000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1560198765548</created>
@@ -247,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587067944689</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="add editable title">
+      <created>1587070611558</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1587070611558</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,37 +312,46 @@
     <MESSAGE value="start loading and saving to the server" />
     <MESSAGE value="add open file dialog" />
     <MESSAGE value="load and delete files from remote" />
-    <option name="LAST_COMMIT_MESSAGE" value="load and delete files from remote" />
+    <MESSAGE value="add editable title" />
+    <option name="LAST_COMMIT_MESSAGE" value="add editable title" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1586479829979">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1586479829979" />
-    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1586479829976">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1586479829976" />
-    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1586479829975">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1586479829975" />
-    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1586479829977">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1586479829977" />
-    <state x="238" y="397" key="Vcs.Push.Dialog.v2" timestamp="1587067946035">
+    <state width="1501" height="419" key="GridCell.Tab.0.bottom" timestamp="1587082144333">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="238" y="397" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1587067946035" />
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1586479829979" />
+    <state width="1501" height="419" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1587082144333" />
+    <state width="1501" height="419" key="GridCell.Tab.0.center" timestamp="1587082144332">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1586479829976" />
+    <state width="1501" height="419" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1587082144332" />
+    <state width="1501" height="419" key="GridCell.Tab.0.left" timestamp="1587082144331">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1586479829975" />
+    <state width="1501" height="419" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1587082144331" />
+    <state width="1501" height="419" key="GridCell.Tab.0.right" timestamp="1587082144332">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1586479829977" />
+    <state width="1501" height="419" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1587082144332" />
+    <state x="238" y="397" key="Vcs.Push.Dialog.v2" timestamp="1587070613481">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="238" y="397" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1587070613481" />
+    <state x="381" y="435" width="738" height="570" key="find.popup" timestamp="1587082650404">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="381" y="435" width="738" height="570" key="find.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1587082650404" />
     <state x="385" y="210" key="run.anything.popup" timestamp="1587049446249">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049446249" />
-    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup" timestamp="1587069105569">
+    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup" timestamp="1587082101526">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1587049381260" />
-    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1587069105569" />
+    <state x="684" y="314" width="1192" height="1082" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1587082101526" />
   </component>
 </project>

@@ -56,13 +56,15 @@ export class DocServerAPI {
         })
     }
     save(doc) {
+        // console.log("saving the doc",doc)
         let doc_text = JSON.stringify(doc, null, 4);
-        console.log("saving now",doc_text)
+        // console.log("saving now",doc_text)
         let params = {
             type:'meowsynth',
             mimetype:'application/json',
             title:doc.title?doc.title:'untitled',
         }
+        if(doc.docid) params.id = doc.docid
         let query = '?'+ Object.keys(params).map(key => key+'='+params[key]).join("&")
 
         return this._fetch(`${this.url}/docs/${this.getUsername()}/upload/${query}`,{
@@ -78,7 +80,7 @@ export class DocServerAPI {
         options.cache = 'no-cache'
         if (!options.headers) options.headers = {}
         options.headers["access-key"] = this.getAccessToken()
-        console.log("fetching", url, 'with options', options)
+        // console.log("fetching", url, 'with options', options)
         return fetch(url, options)
             .then(res => {
                 if (res.status === 404) throw new Error(res.statusText + " " + res.url)
